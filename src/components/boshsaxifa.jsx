@@ -74,7 +74,7 @@ const notification = () => {
 
                       <div className="w-full md:w-1/2 z-10">
                       <img src={Logo} className="w-52 transform max-sm:w-32 translate-x-[-12px]" alt="" />
-                        <h2 className="text-2xl md:text-5xl font-extrabold text-white mb-4 leading-tight whitespace-pre-line">
+                        <h2 className="text-2xl md:text-5xl   text-white mb-4 leading-tight whitespace-pre-line">
                           {slide.title}
                         </h2>
                         <p className="text-sm md:text-lg text-cyan-50 mb-8 max-w-md">

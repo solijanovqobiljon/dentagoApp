@@ -5,7 +5,7 @@ import { MdGridView } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 
 // Rasmlar
-import Chair from "../assets/chair.png"; 
+import Chair from "../assets/elon.png"; 
 import Logo from "../assets/logo.png"; 
 
 const categories = [
@@ -39,12 +39,12 @@ function Elonlar() {
 
   const slides = [
     { 
-      title: "Eng yaxshi uskunalarni\nbizdan topasiz", 
-      description: "Bizning mahsulotlar sifatli, ishonchli va qulay narxlarda!" 
+      title: "Sotmoqchimisiz? Muammo emas!", 
+      description: "Mahsulotingizni e’lonlar bo’limiga joylang va tezda soting!" 
     },
     { 
-      title: "Professional xizmat va\nsifatli kafolat", 
-      description: "Barcha turdagi stomatologik jihozlar faqat bizda." 
+      title: "Sotmoqchimisiz? Muammo emas!", 
+      description: "Mahsulotingizni e’lonlar bo’limiga joylang va tezda soting!" 
     },
   ];
   const notification = () => {
@@ -88,10 +88,10 @@ function Elonlar() {
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {slides.map((slide, index) => (
-                <div key={index} className="w-full flex-shrink-0 bg-[#00C2FF] p-8 md:p-16 h-[300px] md:h-[400px] flex items-center relative">
+                <div key={index} className="w-full flex-shrink-0 bg-[#76F6D7] p-8 md:p-16 h-[300px] md:h-[400px] flex items-center relative">
                   <div className="z-10 w-full md:w-1/2">
                     <img src={Logo} alt="dentaGo" className="w-32 md:w-48 mb-6 translate-x-[-10px]" />
-                    <h2 className="text-white font-extrabold text-2xl md:text-4xl leading-tight mb-4 whitespace-pre-line">
+                    <h2 className="text-white  text-2xl md:text-4xl leading-tight mb-4 whitespace-pre-line">
                       {slide.title}
                     </h2>
                     <p className="text-white text-sm md:text-lg opacity-90 max-w-md">

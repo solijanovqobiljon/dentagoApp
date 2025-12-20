@@ -72,7 +72,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Pastki tugma */}
-            <div className="fixed bottom-20 left-0 right-0 p-4 bg-white border-t">
+            <div className="fixed bottom-20 left-0 right-0 p-4 bg-white bottom-[66px]">
                 <button className="w-full cursor-pointer bg-[#00C2FF] text-white py-4 rounded-2xl font-bold text-lg active:scale-95 transition-all">
                     В корзину
                 </button>

@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 // Rasmlar
-import Chair from "../assets/chair.png"; 
+import Chair from "../assets/tex.png";
 import Logo from "../assets/logo.png"; 
 
 const categories = [
@@ -73,8 +73,14 @@ function Ustalar() {
   };
 
   const slides = [
-    { title: "Eng yaxshi uskunalarni\nbizdan topasiz", description: "Bizning mahsulotlar sifatli, ishonchli va qulay narxlarda!" },
-    { title: "Professional xizmat va\nsifatli kafolat", description: "Barcha turdagi stomatologik jihozlar faqat bizda." },
+    {
+      title: "Muammo haqida xabar bering",
+      description: "Uskunangiz nosoz bo’lsa uni tuzatishga yordam beramiz",
+    },
+    {
+      title: "Muammo haqida xabar bering",
+      description: "Uskunangiz nosoz bo’lsa uni tuzatishga yordam beramiz",
+    },
   ];
 
   useEffect(() => {
@@ -105,11 +111,11 @@ function Ustalar() {
           <div className="relative group overflow-hidden rounded-[30px] shadow-sm">
             <div className="flex transition-transform duration-700 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
               {slides.map((slide, index) => (
-                <div key={index} className="w-full flex-shrink-0 bg-[#00C2FF] p-8 md:p-16 h-[250px] md:h-[400px] flex items-center relative text-white">
+                <div key={index} className="w-full flex-shrink-0 bg-gradient-to-r from-[#c4f5e9] to-[#66bba6] p-8 md:p-16 h-[250px] md:h-[400px] flex items-center relative text-white">
                   <div className="z-10 w-full md:w-1/2">
                     <img src={Logo} alt="dentaGo" className="w-24 md:w-48 mb-4" />
-                    <h2 className="font-extrabold text-xl md:text-4xl leading-tight mb-2 whitespace-pre-line">{slide.title}</h2>
-                    <p className="text-xs md:text-lg opacity-90 max-w-md">{slide.description}</p>
+                    <h2 className="font-bold text-[#009571] text-xl md:text-4xl leading-tight mb-2 whitespace-pre-line">{slide.title}</h2>
+                    <p className="text-xs md:text-lg text-gray-600 opacity-90 max-w-md">{slide.description}</p>
                   </div>
                   <div className="absolute right-4 md:right-16 top-1/2 -translate-y-1/2 w-1/3 flex justify-end">
                     <img src={Chair} alt="Chair" className="h-32 md:h-[320px] object-contain" />

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-
+import { Link } from "react-router-dom";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-import Chair from "../assets/chair.png";
+import Chair from "../assets/usta.png";
 import Logo from "../assets/logo.png";
 import DoctorCard from "./DoctorCard"; // Shu fayl mavjudligini tekshiring
 import { Search, Users, Megaphone, Bell } from "lucide-react";
@@ -100,19 +100,24 @@ const doctors = [
     service: true,
   },
 ];
-
+const categories = [
+  { id: 'barchasi', label: 'Barchasi', Icon: MdGridView, path: '/' },
+  { id: 'elonlar', label: 'Elonlar', Icon: Megaphone, path: '/elonlar' },
+  { id: 'texniklar', label: 'Texniklar', Icon: RiToothLine, path: '/texniklar' },
+  { id: 'ustalar', label: 'Ustalar', Icon: Users, path: '/ustalar' },
+];
 function DentoGoApp() {
   const [activeTab, setActiveTab] = useState("texniklar");
   const [searchTerm, setSearchTerm] = useState("");
 
   const slides = [
     {
-      title: "Eng yaxshi uskunalarni\nbizdan topasiz",
-      description: "Bizning mahsulotlar sifatli, ishonchli va qulay narxlarda!",
+      title: "Tish-texniklar sizning xizmatingizda",
+      description: "Sifatli va qulay  tish yasashda bizga ishonsangiz bo’ladi!",
     },
     {
-      title: "Professional stomatologiya\nasboblari",
-      description: "Yuqori sifatli texnika va ishonchli xizmat.",
+      title: "Tish-texniklar sizning xizmatingizda",
+      description: "Sifatli va qulay  tish yasashda bizga ishonsangiz bo’ladi!",
     },
   ];
 
@@ -155,13 +160,13 @@ function DentoGoApp() {
           >
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-gradient-to-r from-cyan-400 to-cyan-500 h-[300px] md:h-[450px] p-8 md:p-16 flex items-center relative overflow-hidden">
+                <div className="bg-[#D8F8FF] h-[300px] md:h-[450px] p-8 md:p-16 flex items-center relative overflow-hidden">
                   <div className="w-full md:w-1/2 z-10">
                     <img src={Logo} className="w-40 md:w-52 mb-4 -ml-2" alt="Logo" />
-                    <h2 className="text-2xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
+                    <h2 className="text-2xl md:text-5xl   text-[#009571] mb-4 leading-tight">
                       {slide.title}
                     </h2>
-                    <p className="text-sm md:text-lg text-cyan-50 mb-8 max-w-md">{slide.description}</p>
+                    <p className="text-sm md:text-lg text-gray-600 mb-8 max-w-md">{slide.description}</p>
                   </div>
                   <div className="absolute right-0 md:right-16 top-1/2 -translate-y-1/2 w-1/2 flex justify-end">
                     <img src={Chair} alt="Chair" className="h-48 md:h-[380px] object-contain" />
@@ -172,29 +177,17 @@ function DentoGoApp() {
           </Swiper>
         </section>
 
-        {/* TABS */}
-        <section className="px-4 md:px-8 pb-12">
+         {/* 3. CATEGORIES (Grid ko'rinishi) */}
+         <section className="px-4 md:px-8 pb-12">
           <div className="grid grid-cols-4 gap-4 md:gap-8">
-            {[
-              { id: 'barchasi', label: 'Barchasi', Icon: MdGridView },
-              { id: 'elonlar', label: 'Elonlar', Icon: Megaphone },
-              { id: 'texniklar', label: 'Texniklar', Icon: RiToothLine },
-              { id: 'ustalar', label: 'Ustalar', Icon: Users },
-            ].map(({ id, label, Icon }) => (
-              <button
-                key={id}
-                onClick={() => setActiveTab(id)}
-                className="flex flex-col items-center gap-4"
-              >
-                <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex border-2 items-center justify-center transition-all ${
-                  activeTab === id ? 'bg-cyan-500 border-cyan-500 text-white shadow-lg' : 'bg-white border-cyan-500 text-cyan-500'
-                }`}>
-                  <Icon className="text-3xl md:text-4xl" />
+            {categories.map(({ id, label, Icon, path }) => (
+              <Link key={id} to={path} onClick={() => setActiveTab(id)} className="flex flex-col items-center gap-3">
+                <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex border-2 items-center justify-center transition-all 
+                  ${activeTab === id ? 'bg-[#00C2FF] border-[#00C2FF] text-white shadow-lg' : 'bg-white border-[#00C2FF] text-[#00C2FF]'}`}>
+                  <Icon className="text-2xl md:text-3xl" />
                 </div>
-                <span className={`text-sm md:text-lg font-semibold ${activeTab === id ? 'text-cyan-700' : 'text-gray-600'}`}>
-                  {label}
-                </span>
-              </button>
+                <span className={`text-xs md:text-lg font-semibold ${activeTab === id ? 'text-[#00C2FF]' : 'text-gray-600'}`}>{label}</span>
+              </Link>
             ))}
           </div>
         </section>
