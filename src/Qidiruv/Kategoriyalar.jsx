@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { stomatologiyaKatalogi } from './MalumotlarStatik';
 import { FaThLarge, FaChevronRight, FaSearch, FaBoxOpen } from 'react-icons/fa';
+import logo from '../assets/logo.png';
 
 const Kategoriyalar = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
 
-  // 1. Kategoriyalarni filter qilish
+  // Kategoriyalarni qidiruv bo'yicha filter qilish
   const filteredCategories = Object.keys(stomatologiyaKatalogi).filter((key) =>
     stomatologiyaKatalogi[key].sarlavha.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // 2. Mahsulotlarni filter qilish (agar qidiruv bo'lsa)
+  // Mahsulotlarni global qidiruv bo'yicha topish
   const allFoundProducts = [];
   if (searchTerm.length > 1) {
     Object.keys(stomatologiyaKatalogi).forEach(catKey => {
@@ -27,69 +28,109 @@ const Kategoriyalar = () => {
   }
 
   return (
-    <div className="bg-white min-h-screen p-4 pb-24">
-      <div className="text-center mb-6"><h1 className="text-xl font-bold">Qidiruv</h1></div>
+    <>
+      {/* Orqa fonni butun ekranga yoyish uchun fixed div */}
+      <div className="fixed inset-0 bg-[#08778E]"></div>
 
-      {/* Qidiruv inputi */}
-      <div className="relative mb-8">
-        <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Mahsulot yoki kategoriya nomi..."
-          className="w-full p-4 pl-12 rounded-2xl shadow-sm outline-none border border-transparent focus:border-blue-400 bg-white transition-all"
-        />
-      </div>
+      {/* Asosiy kontent — scroll bo'lishi uchun relative va padding */}
+      <div className="relative min-h-screen p-4 pb-32 pt-8 text-white">
+        
+        {/* Header qismi */}
+        <div className="text-center my-10 px-4">
+          <img 
+            src={logo} 
+            alt="Logo" 
+            className="mx-auto w-32 sm:w-40 md:w-48 lg:w-56 mb-8 drop-shadow-xl"
+          />
+          
+          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-relaxed font-medium">
+            Eng so’ngi stomatologiya uskunalari va 
+            <br className="hidden sm:block" />
+            dori-darmonlarini
+            <span className="block mt-2 ml-[20px] text-[19px] sm:text-2xl md:text-5xl lg:text-4xl text-white font-bold border-b-4 border-white pb-2 inline-block">
+              Sotib oling
+            </span>
+          </p>
 
-      {/* Qidiruv natijalari: Mahsulotlar (agar topilsa) */}
-      {allFoundProducts.length > 0 && (
-        <div className="mb-8">
-          <h2 className="text-lg font-bold mb-4 text-blue-600">Topilgan mahsulotlar ({allFoundProducts.length})</h2>
-          <div className="space-y-3">
-            {allFoundProducts.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => navigate(`/mahsulot/${item.catKey}/${item.subKey}/${item.id}`)}
-                className="flex items-center bg-white p-3 rounded-2xl shadow-sm border-l-4 border-blue-400 cursor-pointer active:scale-95 transition-all"
-              >
-                <img src={item.image} alt="" className="w-12 h-12 rounded-lg object-cover mr-4 bg-gray-100" />
-                <div className="flex-1">
-                  <h4 className="font-bold text-gray-800 text-sm">{item.nomi}</h4>
-                  <p className="text-xs text-gray-400">{item.narxi} sum</p>
-                </div>
-                <FaChevronRight className="text-gray-300" size={12} />
-              </div>
-            ))}
-          </div>
+          <p className="mt-6 text-base sm:text-lg text-gray-200 opacity-90">
+            Sifatli mahsulotlar • Tez yetkazib berish • Arzon narxlar
+          </p>
         </div>
-      )}
 
-      {/* Kategoriyalar ro'yxati */}
-      <h2 className="text-lg font-bold mb-4">Kategoriyalar</h2>
-      <div className="space-y-3">
-        {filteredCategories.length > 0 ? (
-          filteredCategories.map((key) => (
-            <div
-              key={key}
-              onClick={() => navigate(`/kategoriyalar/${key}`)}
-              className="flex items-center bg-white p-4 rounded-2xl shadow-sm cursor-pointer active:scale-[0.98] transition-all border border-transparent hover:border-blue-100"
-            >
-              <div className="text-blue-500 mr-4 p-2 border border-blue-50 rounded-xl bg-blue-50">
-                <FaThLarge size={22} />
-              </div>
-              <span className="flex-1 font-semibold text-gray-700">{stomatologiyaKatalogi[key].sarlavha}</span>
-              <FaChevronRight className="text-gray-300" size={14} />
+        {/* Qidiruv inputi */}
+        <div className="relative max-w-2xl mx-auto mb-10">
+          <FaSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500 text-lg" />
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Mahsulot yoki kategoriya nomi..."
+            className="w-full p-4 pl-14 pr-6 text-gray-800 rounded-2xl shadow-lg outline-none focus:ring-4 focus:ring-white/30 bg-white transition-all duration-300"
+          />
+        </div>
+
+        {/* Topilgan mahsulotlar */}
+        {allFoundProducts.length > 0 && (
+          <div className="max-w-4xl mx-auto mb-12">
+            <h2 className="text-xl font-bold mb-5 text-white">
+              Topilgan mahsulotlar ({allFoundProducts.length})
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {allFoundProducts.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => navigate(`/mahsulot/${item.catKey}/${item.subKey}/${item.id}`)}
+                  className="bg-white text-gray-800 rounded-2xl shadow-xl overflow-hidden cursor-pointer transform hover:scale-105 hover:shadow-2xl transition-all duration-300"
+                >
+                  <div className="p-4 flex items-center space-x-4">
+                    <img 
+                      src={item.image} 
+                      alt={item.nomi} 
+                      className="w-16 h-16 rounded-xl object-cover flex-shrink-0 bg-gray-100"
+                    />
+                    <div className="flex-1">
+                      <h4 className="font-bold text-base line-clamp-2">{item.nomi}</h4>
+                      <p className="text-[#08778E] font-semibold mt-1">{item.narxi} so'm</p>
+                    </div>
+                    <FaChevronRight className="text-gray-500 flex-shrink-0" size={20} />
+                  </div>
+                </div>
+              ))}
             </div>
-          ))
-        ) : (
-          <div className="text-center py-10 text-gray-400">
-            <FaBoxOpen size={40} className="mx-auto mb-2 opacity-20" />
-            <p>Hech narsa topilmadi</p>
           </div>
         )}
+
+        {/* Kategoriyalar */}
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold mb-6 text-white">Kategoriyalar</h2>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {filteredCategories.length > 0 ? (
+              filteredCategories.map((key) => (
+                <div
+                  key={key}
+                  onClick={() => navigate(`/kategoriyalar/${key}`)}
+                  className="bg-white text-gray-800 rounded-2xl shadow-xl p-6 flex items-center space-x-5 cursor-pointer transform hover:scale-105 hover:shadow-2xl transition-all duration-300"
+                >
+                  <div className="p-4 bg-[#08778E] text-white rounded-2xl">
+                  <img src={logo} alt="" />     
+                               </div>
+                  <span className="font-bold text-lg flex-1">
+                    {stomatologiyaKatalogi[key].sarlavha}
+                  </span>
+                  <FaChevronRight className="text-gray-500" size={44} />
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-20">
+                <FaBoxOpen size={70} className="mx-auto text-gray-400 mb-4 opacity-50" />
+                <p className="text-xl text-gray-300">Hech narsa topilmadi</p>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
