@@ -30,6 +30,7 @@ import Manzillar from './pages/manzillar.jsx'
 import Contact from './pages/contact.jsx'
 import Terms from './pages/terms.jsx'
 import Tarjima from './pages/lenguage.jsx'
+import Kurs from './components/kurs.jsx'
 function App() {
   return (
     // 2. Hammasini CartProvider bilan o'rab chiqing
@@ -64,6 +65,7 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="terms" element={<Terms />} />
           <Route path="language" element={<Tarjima />} />
+          <Route path="Kurs" element={<Kurs />} />
           </Routes>
         </div>
         <BottomNavbar />
